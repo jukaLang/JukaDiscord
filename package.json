@@ -8,6 +8,9 @@
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
+  "engines": {
+    "node": "16.16"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jukaLang/JukaDiscord.git"
