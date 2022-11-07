@@ -36,6 +36,15 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       });
     }
 
+    if(interaction.data.name == "Juka"){
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: `Running Juka...`,
+        },
+      });
+    }
+
     if(interaction.data.name == 'dm'){
       // https://discord.com/developers/docs/resources/user#create-dm
       let c = (await discord_api.post(`/users/@me/channels`,{
@@ -68,8 +77,13 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 app.get('/register_commands', async (req,res) =>{
   let slash_commands = [
     {
-      "name": "hi",
+      "name": "Hi",
       "description": "replies with Hi!",
+      "options": []
+    },
+    {
+      "name": "Juka",
+      "description": "/Juka func main()={} <- execute Juka code",
       "options": []
     },
     {
