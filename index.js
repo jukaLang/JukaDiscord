@@ -37,13 +37,15 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
     }
 
     if(interaction.data.name == "juka"){
-      var jukaresponse = "test";
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: `Output: ${jukresponse}`,
-        },
-      });
+      return await (async () => {
+        const jukaResponse = await axios('https://api.jukalang.com');
+        return await res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+            content: `Output: ${jukaResponse}`,
+          },
+        });
+    })();
     }
 
     if(interaction.data.name == 'dm'){
