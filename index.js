@@ -27,7 +27,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     console.log(interaction.data.name)
-    if(interaction.data.name == 'Hi'){
+    if(interaction.data.name == 'hi'){
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -36,11 +36,12 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       });
     }
 
-    if(interaction.data.name == "Juka"){
+    if(interaction.data.name == "juka"){
+      var jukaresponse = "test";
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: `Running Juka...`,
+          content: `Output: ${jukresponse}`,
         },
       });
     }
@@ -77,13 +78,13 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 app.get('/register_commands', async (req,res) =>{
   let slash_commands = [
     {
-      "name": "Hi",
+      "name": "hi",
       "description": "replies with Hi!",
       "options": []
     },
     {
-      "name": "Juka",
-      "description": "/Juka func main()={} <- execute Juka code",
+      "name": "juka",
+      "description": "executes Juka code",
       "options": []
     },
     {
