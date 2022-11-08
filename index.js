@@ -37,6 +37,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
     }
 
     if(interaction.data.name == "juka"){
+      console.log(interaction.data.options[0].value)
       const input = interaction.data.options[0].value;
       return await (async (input) => {
         console.log(input);
@@ -48,7 +49,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
             content: `Output: ${jukaResponse.data['output']}`,
           },
         });
-    })();
+    })(input);
     }
 
     /*if(interaction.data.name == 'dm'){
