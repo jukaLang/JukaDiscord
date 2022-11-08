@@ -37,11 +37,11 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
     }
 
     if(interaction.data.name == "juka"){
-      const input = interaction.data.options.value;
+      const input = interaction.data.options[0].value;
       return await (async () => {
         let jukaResponse = await axios('https://api.jukalang.com/'+input);
         return await res.send({
-          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          type: 4,
           data: {
             content: `Output: ${jukaResponse.json()['output']}`,
           },
@@ -49,7 +49,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
     })();
     }
 
-    if(interaction.data.name == 'dm'){
+   /* if(interaction.data.name == 'dm'){
       // https://discord.com/developers/docs/resources/user#create-dm
       let c = (await discord_api.post(`/users/@me/channels`,{
         recipient_id: interaction.member.user.id
@@ -72,7 +72,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
         }
       });
     }
-  }
+  }*/
 
 });
 
@@ -88,13 +88,21 @@ app.get('/register_commands', async (req,res) =>{
     {
       "name": "juka",
       "description": "executes Juka code",
-      "options": ["input"]
+      "options": [{
+        "name": "code",
+        // Short description of subcommand
+        "description": "Code Input",
+        // Type of input from user: https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype
+        "type": 3,
+        // Whether the subcommand is required
+        "required": true
+    }]
     },
-    {
+    /*{
       "name": "dm",
       "description": "sends user a DM",
       "options": []
-    }
+    }*/
   ]
   try
   {
