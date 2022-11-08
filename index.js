@@ -38,8 +38,10 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 
     if(interaction.data.name == "juka"){
       const input = interaction.data.options[0].value;
-      return await (async () => {
+      return await (async (input) => {
+        console.log(input);
         let jukaResponse = await axios('https://api.jukalang.com/'+input);
+        console.log(jukaResponse);
         return await res.send({
           type: 4,
           data: {
