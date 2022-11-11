@@ -46,7 +46,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
         return await res.send({
           type: 4,
           data: {
-            content: `Output: ${jukaResponse.data['output']}`,
+            content: `**Output: **${jukaResponse.data['output']}`,
           },
         });
     })(input);
